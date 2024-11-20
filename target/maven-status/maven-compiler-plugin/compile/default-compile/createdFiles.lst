@@ -1,0 +1,4 @@
+client\com\mycompany\app\App.class
+server\com\mycompany\app\server\ServerInterface.class
+server\com\mycompany\app\server\Server.class
+server\com\mycompany\app\App.class
