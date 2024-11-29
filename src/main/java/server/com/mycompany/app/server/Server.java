@@ -19,8 +19,9 @@ public class Server implements ServerInterface {
             String greeting = in.readLine();
             if ("hello server".equals(greeting)) {
                 out.println("hello client");
+                System.out.println(greeting);
             } else {
-                out.println("unrecognised greeting");
+                out.println("bruh");
             }
         }catch (IOException e){
             System.out.println("failed start:");
