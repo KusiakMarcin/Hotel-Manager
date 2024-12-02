@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) {
         Client client = new Client();
-        client.startConnection("127.0.0.1", 6666);
+        client.startConnection("127.0.0.1", 2137);
         String response = client.sendMessage("hello server");
         System.out.println(response);
     }
