@@ -3,6 +3,7 @@ package server.com.mycompany.app.server;
 import java.net.*;
 import java.io.*;
 import server.com.mycompany.app.server.Database.Database;
+import org.json.*;
 import server.com.mycompany.app.server.Database.Guest;
 
 
@@ -16,8 +17,9 @@ public class Server implements ServerInterface{
     private Database database;
     public void start(int port) {
 
-
-
+        var data = new JSONObject();
+        data.put("Name","Marcin");
+        var data2 = new JSONObject(data.toString());
         try {
             database = new Database("admin","admin");
             var guest = database.getClient();
@@ -27,18 +29,19 @@ public class Server implements ServerInterface{
             clientSocket = serverSocket.accept();
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            InputStream inputStream = clientSocket.getInputStream();
-            ObjectInputStream objectstream = new ObjectInputStream(inputStream);
-            String greeting = in.readLine();
+            String method = in.readLine();
 
 
-            if ("hello server".equals(greeting)) {
+            if ("hello server".equals(method)) {
 
-                out.println("hello client");
-                System.out.println(greeting);
+                    out.println(data.toString());
+                    System.out.println(method);
             } else {
-                out.println(greeting);
+                    out.println("failed");
             }
+
+
+
 
         }catch (IOException e){
             System.out.println("failed start:");

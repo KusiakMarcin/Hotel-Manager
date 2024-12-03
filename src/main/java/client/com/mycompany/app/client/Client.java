@@ -1,14 +1,14 @@
 package client.com.mycompany.app.client;
+import org.json.JSONObject;
+
 import java.net.*;
 import java.io.*;
-import java.nio.channels.ScatteringByteChannel;
 
 public class Client {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
-    OutputStream outputStream;
-    ObjectOutputStream objectOutputStream;
+
 
 
     public void startConnection(String ip, int port) {
@@ -17,8 +17,7 @@ public class Client {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
 
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            outputStream = clientSocket.getOutputStream();
-            objectOutputStream = new ObjectOutputStream(outputStream);
+
         }
         catch (IOException e){
             System.out.println(e);
@@ -30,13 +29,14 @@ public class Client {
 
         try {
             String resp = in.readLine();
-            return resp;
+            var data = new JSONObject(resp);
+            System.out.println(data.getString("Name"));
         }
         catch (IOException e){
 
             return "failed to connect ";
         }
-
+        return "connectedidk";
     }
 
     public void stopConnection() {

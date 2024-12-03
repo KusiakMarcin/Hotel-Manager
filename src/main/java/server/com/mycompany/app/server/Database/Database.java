@@ -18,7 +18,7 @@ public class Database {
 
             // Establish connection
             con = DriverManager.getConnection(url,props);
-            System.out.println("Connected");
+            System.out.println("Connected Database");
         } catch (SQLException e) {
             System.out.println("Connection failed!");
             e.printStackTrace();
