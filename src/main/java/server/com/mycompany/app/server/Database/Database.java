@@ -24,19 +24,18 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public int InsertClient(/*Guest guest*/){
+    public int InsertClient(Guest guest){
 
         String a = querry.Guests.get(querry.INSERT);
         try {
             PreparedStatement stmt = con.prepareStatement(a);
-            stmt.setInt(1, 101); // CLIENT_ID
-            stmt.setString(2, "John"); // NAME
-            stmt.setString(3, "Doe"); // LAST_NAME
-            stmt.setDate(4, Date.valueOf("1990-01-01")); // BIRTH_DATE
-            stmt.setString(5, "American"); // NATIONALITY
-            stmt.setInt(6, 340678456); // PHONE_NUMBER
-            stmt.setInt(7, 48); // COUNTRY_CODE
-            stmt.setString(8, "john.doe@example.com");
+            stmt.setString(1, guest.getName()); // NAME
+            stmt.setString(2, guest.getLastName()); // LAST_NAME
+            stmt.setDate(3, guest.getBirthDate()); // BIRTH_DATE
+            stmt.setString(4, guest.getNationality()); // NATIONALITY
+            stmt.setInt(5, guest.getPhoneNumber()); // PHONE_NUMBER
+            stmt.setInt(6, guest.getCountryCode()); // COUNTRY_CODE
+            stmt.setString(7, guest.getEmail());
             int rowInserted = stmt.executeUpdate();
             System.out.println(rowInserted+"rows");
         }catch(SQLException e){

@@ -9,6 +9,8 @@ public class Client {
     private PrintWriter out;
     private BufferedReader in;
 
+    private JSONObject message= new JSONObject();
+
 
 
     public void startConnection(String ip, int port) {
@@ -24,19 +26,21 @@ public class Client {
         }
         }
 
-    public String sendMessage(String msg) {
+    public JSONObject sendMessage(String msg) {
         out.println(msg);
-
+        JSONObject data;
         try {
             String resp = in.readLine();
-            var data = new JSONObject(resp);
-            System.out.println(data.getString("Name"));
+            data = new JSONObject(resp);
+            return data;
         }
         catch (IOException e){
-
-            return "failed to connect ";
+            System.out.println(e);
+            data = new JSONObject();
+            data.put("Type","Error");
+            return data;
         }
-        return "connectedidk";
+
     }
 
     public void stopConnection() {

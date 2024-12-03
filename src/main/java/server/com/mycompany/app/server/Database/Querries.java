@@ -11,7 +11,7 @@ public class Querries {
     public ArrayList<String> Guests= new ArrayList<String>();
 
     public Querries(){
-        Guests.add("INSERT INTO CLIENT (CLIENT_ID, NAME, LAST_NAME,BIRTH_DATE,NATIONALITY,PHONE_NUMBER,COUNTRY_CODE,EMAIL_ADRESS) VALUES(?,?,?,?,?,?,?,?)");
+        Guests.add("INSERT INTO CLIENT (CLIENT_ID_INCR.NEXTVAL, NAME, LAST_NAME,BIRTH_DATE,NATIONALITY,PHONE_NUMBER,COUNTRY_CODE,EMAIL_ADRESS) VALUES(?,?,?,?,?,?,?,?)");
         Guests.add("SELECT * FROM CLIENT");
 
     }

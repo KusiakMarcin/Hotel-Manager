@@ -13,6 +13,7 @@ public class Server implements ServerInterface{
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
+    JSONObject messageJSON;
 
     private Database database;
     public void start(int port) {
@@ -21,6 +22,7 @@ public class Server implements ServerInterface{
         data.put("Name","Marcin");
         var data2 = new JSONObject(data.toString());
         try {
+
             database = new Database("admin","admin");
             var guest = database.getClient();
             System.out.println(guest.getName());
@@ -29,15 +31,11 @@ public class Server implements ServerInterface{
             clientSocket = serverSocket.accept();
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String method = in.readLine();
-
-
-            if ("hello server".equals(method)) {
-
-                    out.println(data.toString());
-                    System.out.println(method);
-            } else {
-                    out.println("failed");
+            String message = in.readLine();
+            messageJSON = new JSONObject(message);
+            while(!messageJSON.getString("Type").equals("CLOSE")){
+                messageHandler(messageJSON);
+                message = in.readLine();
             }
 
 
@@ -50,7 +48,14 @@ public class Server implements ServerInterface{
     }
 
 
+    JSONObject messageHandler(JSONObject msg){
+        JSONObject tmp = new JSONObject();
+        if(msg.getString("Type").equals("GET")){
+            database.getClient();
+        }
 
+        return tmp;
+    }
     public void stop() {
         try {
             in.close();
@@ -62,5 +67,6 @@ public class Server implements ServerInterface{
             System.out.println("failed close:");
             System.out.println(e);
         }
-        }
+    }
+
 }
