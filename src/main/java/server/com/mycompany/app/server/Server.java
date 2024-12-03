@@ -20,16 +20,20 @@ public class Server implements ServerInterface{
 
         try {
             database = new Database("admin","admin");
+            var guest = database.getClient();
+            System.out.println(guest.getName());
+
             serverSocket = new ServerSocket(port);
             clientSocket = serverSocket.accept();
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             InputStream inputStream = clientSocket.getInputStream();
             ObjectInputStream objectstream = new ObjectInputStream(inputStream);
-            database.InsertClient(/*new Guest()*/);
-
             String greeting = in.readLine();
+
+
             if ("hello server".equals(greeting)) {
+
                 out.println("hello client");
                 System.out.println(greeting);
             } else {
