@@ -24,7 +24,7 @@ public class Server implements ServerInterface{
         try {
 
             database = new Database("admin","admin");
-            var guest = database.getClient();
+            var guest = database.getClient(101);
             System.out.println(guest.getName());
 
             serverSocket = new ServerSocket(port);
@@ -38,7 +38,7 @@ public class Server implements ServerInterface{
                 message = in.readLine();
             }
 
-
+            stop();
 
 
         }catch (IOException e){
@@ -51,7 +51,7 @@ public class Server implements ServerInterface{
     JSONObject messageHandler(JSONObject msg){
         JSONObject tmp = new JSONObject();
         if(msg.getString("Type").equals("GET")){
-            database.getClient();
+            database.getClient(101);
         }
 
         return tmp;

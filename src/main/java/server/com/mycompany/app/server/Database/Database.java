@@ -3,6 +3,7 @@ package server.com.mycompany.app.server.Database;
 import client.com.mycompany.app.client.Client;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 public class Database {
     private String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -16,7 +17,6 @@ public class Database {
         props.put("internal_logon", "SYSDBA");
         try {
 
-            // Establish connection
             con = DriverManager.getConnection(url,props);
             System.out.println("Connected Database");
         } catch (SQLException e) {
@@ -44,13 +44,87 @@ public class Database {
         }
         return 1;
     }
+    public int updateClient(int primaryKey,String cloumn,int value){
+        String Querry = querry.Guests.get(querry.UPDATE);
+        try {
+            PreparedStatement stmt = con.prepareStatement(Querry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt.setString(1,cloumn);
+            stmt.setInt(2,value);
+            stmt.setInt(3,primaryKey);
 
-    public Guest getClient(){
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+            System.out.println(e);
+            return -1;
+        }
+
+        return 1;
+    }
+
+    public int updateClient(int primaryKey,String column,String value){
+        String Querry = querry.Guests.get(querry.UPDATE);
+        try {
+            PreparedStatement stmt = con.prepareStatement(Querry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt.setString(1,column);
+            stmt.setString(2,value);
+            stmt.setInt(3,primaryKey);
+
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+            System.out.println(e);
+            return -1;
+        }
+
+        return 1;
+
+    }
+    public int updateClient(int primaryKey,String column,Date value){
+        String Querry = querry.Guests.get(querry.UPDATE);
+        try {
+            PreparedStatement stmt = con.prepareStatement(Querry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt.setString(1,column);
+            stmt.setDate(2,value);
+            stmt.setInt(3,primaryKey);
+
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+            System.out.println(e);
+            return -1;
+        }
+        return 1;
+    }
+
+    public ArrayList<Guest> getClientTable(){
+        String Querry = querry.Guests.get(querry.TABLE);
+        var tmp = new Guest();
+        ArrayList<Guest> dataList = new ArrayList<Guest>();
+        try{
+            PreparedStatement stmt = con.prepareStatement(Querry,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            ResultSet result =stmt.executeQuery();
+            if(result.first()) {
+                while (result.isAfterLast()){
+                    retriveClientData(tmp,result);
+                    dataList.add(tmp);
+                    result.next();
+                }
+            }else{
+                System.out.println("result.first() false");
+            }
+        }catch(SQLException e ){
+            System.out.println(e);
+        }
+        return dataList;
+    }
+    public Guest getClient(int primaryKey){
 
         String a = querry.Guests.get(querry.SELECT);
         var tmp = new Guest();
         try {
             PreparedStatement stmt = con.prepareStatement(a,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            stmt.setInt(1,primaryKey);
             ResultSet result = stmt.executeQuery(a);
             result.first();
             tmp.setClientID(result.getInt("CLIENT_ID"));
@@ -68,5 +142,19 @@ public class Database {
 
         }
         return tmp;
+    }
+    public void retriveClientData(Guest guest ,ResultSet data){
+        try {
+            guest.setClientID(data.getInt("CLIENT_ID"));
+            guest.setName(data.getString("NAME"));
+            guest.setLastName(data.getString("LAST_NAME"));
+            guest.setBirthDate(data.getDate("BIRTH_DATE"));
+            guest.setNationality(data.getString("NATIONALITY"));
+            guest.setPhoneNumber(data.getInt("PHONE_NUMBER"));
+            guest.setCountryCode(data.getInt("COUNTRY_CODE"));
+            guest.setEmail(data.getString("EMAIL_ADRESS"));
+        }catch (SQLException e ){
+            System.out.println(e);
+        }
     }
 }
