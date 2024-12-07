@@ -127,14 +127,15 @@ public class Database {
             stmt.setInt(1,primaryKey);
             ResultSet result = stmt.executeQuery(a);
             result.first();
-            tmp.setClientID(result.getInt("CLIENT_ID"));
-            tmp.setName(result.getString("NAME"));
-            tmp.setLastName(result.getString("LAST_NAME"));
-            tmp.setBirthDate(result.getDate("BIRTH_DATE"));
-            tmp.setNationality(result.getString("NATIONALITY"));
-            tmp.setPhoneNumber(result.getInt("PHONE_NUMBER"));
-            tmp.setCountryCode(result.getInt("COUNTRY_CODE"));
-            tmp.setEmail(result.getString("EMAIL_ADRESS"));
+            retriveClientData(tmp,result);
+//            tmp.setClientID(result.getInt("CLIENT_ID"));
+//            tmp.setName(result.getString("NAME"));
+//            tmp.setLastName(result.getString("LAST_NAME"));
+//            tmp.setBirthDate(result.getDate("BIRTH_DATE"));
+//            tmp.setNationality(result.getString("NATIONALITY"));
+//            tmp.setPhoneNumber(result.getInt("PHONE_NUMBER"));
+//            tmp.setCountryCode(result.getInt("COUNTRY_CODE"));
+//            tmp.setEmail(result.getString("EMAIL_ADRESS"));
 
         }catch (SQLException e){
             System.out.println(e);

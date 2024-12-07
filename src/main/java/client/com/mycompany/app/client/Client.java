@@ -4,7 +4,8 @@ import org.json.JSONObject;
 import java.net.*;
 import java.io.*;
 
-public class Client {
+
+public class Client{
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;

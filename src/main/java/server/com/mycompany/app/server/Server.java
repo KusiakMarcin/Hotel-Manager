@@ -14,6 +14,7 @@ public class Server implements ServerInterface{
     private PrintWriter out;
     private BufferedReader in;
     JSONObject messageJSON;
+    JSONObject response;
 
     private Database database;
     public void start(int port) {
@@ -34,7 +35,8 @@ public class Server implements ServerInterface{
             String message = in.readLine();
             messageJSON = new JSONObject(message);
             while(!messageJSON.getString("Type").equals("CLOSE")){
-                messageHandler(messageJSON);
+                response = messageHandler(messageJSON);
+                out.println(response.toString());
                 message = in.readLine();
             }
 
