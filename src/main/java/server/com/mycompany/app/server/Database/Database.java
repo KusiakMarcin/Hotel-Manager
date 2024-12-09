@@ -39,7 +39,7 @@ public class Database {
             int rowInserted = stmt.executeUpdate();
             System.out.println(rowInserted+"rows");
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println(e+ "insertClient");
             return -1;
         }
         return 1;
@@ -55,7 +55,7 @@ public class Database {
             stmt.executeQuery();
 
         }catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e+ "updateClient");
             return -1;
         }
 
@@ -73,7 +73,7 @@ public class Database {
             stmt.executeQuery();
 
         }catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e+ "updateClient");
             return -1;
         }
 
@@ -91,7 +91,7 @@ public class Database {
             stmt.executeQuery();
 
         }catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e + "updateClient");
             return -1;
         }
         return 1;
@@ -114,7 +114,7 @@ public class Database {
                 System.out.println("result.first() false");
             }
         }catch(SQLException e ){
-            System.out.println(e);
+            System.out.println(e + "getClientTable");
         }
         return dataList;
     }
@@ -125,7 +125,8 @@ public class Database {
         try {
             PreparedStatement stmt = con.prepareStatement(a,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             stmt.setInt(1,primaryKey);
-            ResultSet result = stmt.executeQuery(a);
+            ResultSet result = stmt.executeQuery();
+
             result.first();
             retriveClientData(tmp,result);
 //            tmp.setClientID(result.getInt("CLIENT_ID"));
@@ -138,7 +139,9 @@ public class Database {
 //            tmp.setEmail(result.getString("EMAIL_ADRESS"));
 
         }catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e+" getClient");
+
+
 
 
         }
@@ -156,6 +159,7 @@ public class Database {
             guest.setEmail(data.getString("EMAIL_ADRESS"));
         }catch (SQLException e ){
             System.out.println(e);
+
         }
     }
 }

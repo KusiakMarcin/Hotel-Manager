@@ -1,5 +1,8 @@
 package server.com.mycompany.app.server.Database;
 
+import org.json.JSONObject;
+
+import java.sql.Connection;
 import java.sql.Date;
 
 public class Guest {
@@ -77,5 +80,16 @@ public class Guest {
     public String getEmail() {
         return Email;
     }
-
+    public JSONObject toJSON(){
+        JSONObject tmp = new JSONObject();
+        tmp.put("CLIENT_ID",ClientID);
+        tmp.put("NAME",Name);
+        tmp.put("LAST_NAME",LastName);
+        tmp.put("BIRTH_DATE",BirthDate);
+        tmp.put("NATIONALITY",Nationality);
+        tmp.put("PHONE_NUMBER",PhoneNumber);
+        tmp.put("COUNTRY_CODE", CountryCode);
+        tmp.put("EMAIL_ADRESS",Email);
+        return tmp;
+    }
 }

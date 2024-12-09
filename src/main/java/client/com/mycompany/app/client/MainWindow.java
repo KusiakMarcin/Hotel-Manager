@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 public class MainWindow {
 
-    private FXMLLoader;
+    //private FXMLLoader;
 
 
 

@@ -26,7 +26,7 @@ public class Server implements ServerInterface{
 
             database = new Database("admin","admin");
             var guest = database.getClient(101);
-            System.out.println(guest.getName());
+            System.out.println(guest.getClientID());
 
             serverSocket = new ServerSocket(port);
             clientSocket = serverSocket.accept();
@@ -52,8 +52,10 @@ public class Server implements ServerInterface{
 
     JSONObject messageHandler(JSONObject msg){
         JSONObject tmp = new JSONObject();
+        Guest guestBuffer = new Guest();
         if(msg.getString("Type").equals("GET")){
-            database.getClient(101);
+            guestBuffer = database.getClient(msg.getInt("PrimaryKey"));
+
         }
 
         return tmp;
