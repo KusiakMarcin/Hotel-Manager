@@ -1,4 +1,12 @@
-E:\studia\PO2\PROJEKT\Hotel-Manager\src\main\java\client\com\mycompany\app\App.java
-E:\studia\PO2\PROJEKT\Hotel-Manager\src\main\java\server\com\mycompany\app\App.java
-E:\studia\PO2\PROJEKT\Hotel-Manager\src\main\java\server\com\mycompany\app\server\Server.java
-E:\studia\PO2\PROJEKT\Hotel-Manager\src\main\java\server\com\mycompany\app\server\ServerInterface.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\client\com\mycompany\app\App.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\client\com\mycompany\app\client\Client.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\client\com\mycompany\app\client\Hotel.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\client\com\mycompany\app\client\HotelsView.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\client\com\mycompany\app\client\MainWindow.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\server\com\mycompany\app\App.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\server\com\mycompany\app\server\Database\Database.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\server\com\mycompany\app\server\Database\DatabaseInterface.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\server\com\mycompany\app\server\Database\Guest.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\server\com\mycompany\app\server\Database\Querries.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\server\com\mycompany\app\server\Server.java
+C:\Users\Adi\Documents\Hotel-Manager-main\src\main\java\server\com\mycompany\app\server\ServerInterface.java

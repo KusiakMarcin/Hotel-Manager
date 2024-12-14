@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="861.0" prefWidth="1317.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.com.mycompany.app.resource.MainWindow">
+<AnchorPane prefHeight="861.0" prefWidth="1317.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.com.mycompany.app.client.MainWindow">
    <children>
       <ToolBar layoutX="-1.0" layoutY="1.0" prefHeight="46.0" prefWidth="1323.0">
         <items>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="861.0" prefWidth="1317.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.com.mycompany.app.client.HotelsView">
+    <children>
+        <ToolBar layoutX="-1.0" layoutY="1.0" prefHeight="46.0" prefWidth="1323.0">
+            <items>
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100" text="Hotele" />
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Klienci" />
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pracownicy" />
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Rezerwacje" />
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Płatności" />
+            </items>
+        </ToolBar>
+        <VBox layoutX="29.0" layoutY="409.0" prefHeight="376.0" prefWidth="441.0">
+            <children>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="ID Hotelu" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Nazwa Hotelu" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Ulica" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Nr Budynku" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Kod Pocztowy" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Miasto" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Kraj" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Nr Telefonu" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="75" prefWidth="475">
+                    <children>
+                        <Label prefHeight="50.0" prefWidth="150" text="Kod Kraju" />
+                        <TextField prefHeight="40" prefWidth="400" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <TableView fx:id="hotelsTable" layoutX="481.0" layoutY="73.0" prefHeight="770.0" prefWidth="820.0">
+            <columns>
+                <TableColumn prefWidth="31.0" text="ID" />
+                <TableColumn prefWidth="150.0" text="Nazwa Hotelu" />
+                <TableColumn prefWidth="150.0" text="Ulica" />
+                <TableColumn prefWidth="81.0" text="Nr Budynku" />
+                <TableColumn prefWidth="100.0" text="Kod Pocztowy" />
+                <TableColumn prefWidth="100.0" text="Miasto" />
+                <TableColumn prefWidth="100.0" text="Kraj" />
+                <TableColumn prefWidth="100.0" text="Nr Telefonu" />
+                <TableColumn prefWidth="60.0" text="Kod Kraju" />
+            </columns>
+        </TableView>
+        <Button layoutX="30.0" layoutY="811.0" mnemonicParsing="false" text="Dodaj" />
+        <Button layoutX="32.0" layoutY="360.0" mnemonicParsing="false" text="Usuń" />
+        <Button layoutX="120.0" layoutY="360.0" mnemonicParsing="false" text="Edytuj" />
+    </children>
+</AnchorPane>

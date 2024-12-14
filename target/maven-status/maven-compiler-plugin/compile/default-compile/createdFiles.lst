@@ -1,4 +1,12 @@
+server\com\mycompany\app\server\Database\Querries.class
+client\com\mycompany\app\client\Client.class
+client\com\mycompany\app\client\Hotel.class
 client\com\mycompany\app\App.class
+client\com\mycompany\app\client\MainWindow.class
 server\com\mycompany\app\server\ServerInterface.class
+client\com\mycompany\app\client\HotelsView.class
 server\com\mycompany\app\server\Server.class
 server\com\mycompany\app\App.class
+server\com\mycompany\app\server\Database\Guest.class
+server\com\mycompany\app\server\Database\Database.class
+server\com\mycompany\app\server\Database\DatabaseInterface.class
