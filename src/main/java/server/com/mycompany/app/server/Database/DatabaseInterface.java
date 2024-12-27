@@ -1,10 +1,10 @@
 package server.com.mycompany.app.server.Database;
 
 public interface DatabaseInterface {
-    Guest InsertClient();
+    Client InsertClient();
     void InsertRoom();
     void InsertHotel();
 
-    Guest GetClient();
+    Client GetClient();
 
 }

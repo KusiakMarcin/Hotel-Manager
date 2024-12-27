@@ -2,9 +2,17 @@ package server.com.mycompany.app.server;
 
 import java.net.*;
 import java.io.*;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import server.com.mycompany.app.server.Database.Database;
 import org.json.*;
-import server.com.mycompany.app.server.Database.Guest;
+import server.com.mycompany.app.server.Database.Client;
+import server.com.mycompany.app.server.Database.Querries;
 
 
 public class Server implements ServerInterface{
@@ -19,14 +27,11 @@ public class Server implements ServerInterface{
     private Database database;
     public void start(int port) {
 
-        var data = new JSONObject();
-        data.put("Name","Marcin");
-        var data2 = new JSONObject(data.toString());
+
         try {
 
-            database = new Database("admin","admin");
-            var guest = database.getClient(101);
-            System.out.println(guest.getClientID());
+            Client client;
+
 
             serverSocket = new ServerSocket(port);
             clientSocket = serverSocket.accept();
@@ -35,8 +40,7 @@ public class Server implements ServerInterface{
             String message = in.readLine();
             messageJSON = new JSONObject(message);
             while(!messageJSON.getString("Type").equals("CLOSE")){
-                response = messageHandler(messageJSON);
-                out.println(response.toString());
+                messageHandler(messageJSON);
                 message = in.readLine();
             }
 
@@ -50,16 +54,52 @@ public class Server implements ServerInterface{
     }
 
 
-    JSONObject messageHandler(JSONObject msg){
-        JSONObject tmp = new JSONObject();
-        Guest guestBuffer = new Guest();
-        if(msg.getString("Type").equals("GET")){
-            guestBuffer = database.getClient(msg.getInt("PrimaryKey"));
+    void messageHandler(JSONObject msg){
+
+        JSONObject response = new JSONObject();
+        String Type = msg.getString("Type");
+        switch (Type){
+
+            case "GET_CLIENT":
+                Client data = database.getClient(msg.getInt("CLIENT_ID"));
+            case "GET_CLIENT_TABLE":
+                ArrayList<Client> datalist = database.getClientTable();
+                Iterator<Client> iterator = datalist.iterator();
+                while(iterator.hasNext()){
+                    response = iterator.next().toJSON();
+                    response.put("Type","CLIENT");
+                    out.println(response.toString());
+                }
+                response.clear();
+                response.put("Type","END");
+                break;
+            case "UPDATE_CLIENT":
+                int i;
+                switch (msg.getString("Object")){
+
+                    case "INT":
+                        i = database.updateClient(msg.getInt("CLIENT_ID"),msg.getString("Column"),msg.getInt("VALUE"));
+                        break;
+                    case "STRING":
+                        i = database.updateClient(msg.getInt("CLIENT_ID"),msg.getString("Column"),msg.getString("VALUE"));
+                        break;
+                    case "DATE":
+
+                        i = database.updateClient(msg.getInt("CLIENT_ID"),msg.getString("Column"),Date.valueOf(msg.getString("VALUE")));
+                        break;
+                }
+
+
+
+
+
 
         }
 
-        return tmp;
+
     }
+
+
     public void stop() {
         try {
             in.close();

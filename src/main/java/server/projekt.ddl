@@ -8,6 +8,25 @@
 -- predefined type, no DDL - MDSYS.SDO_GEOMETRY
 
 -- predefined type, no DDL - XMLTYPE
+CREATE SEQUENCE CLIENT_ID_INCR
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+MAXVALUE 99999
+CYCLE ;
+
+CREATE SEQUENCE HOTEL_ID_INCR
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 99999
+    CYCLE ;
+CREATE SEQUENCE ROOM_ID_INCR
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 99999
+    CYCLE ;
 
 CREATE TABLE client (
     client_id    NUMBER(7) NOT NULL,
@@ -119,9 +138,7 @@ ALTER TABLE reservation_service ADD CONSTRAINT reservation_service_pk PRIMARY KE
 
 CREATE TABLE room (
     room_id           NUMBER(7) NOT NULL,
-    room_number       unknown 
---  ERROR: Datatype UNKNOWN is not allowed 
-    ,
+    room_number       NUMBER(3) NOT NULL,
     hotel_hotel_id    NUMBER(7) NOT NULL,
     room_type_type_id NUMBER(7) NOT NULL
 )

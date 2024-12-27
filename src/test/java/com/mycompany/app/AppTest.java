@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import server.com.mycompany.app.server.Database.*;
 
-import javax.xml.crypto.Data;
-
 /**
  * Unit test for simple App.
  */
@@ -19,9 +17,9 @@ public class AppTest {
     @Test
     public void clientExists() {
 
-        Database database = new Database("admin","admin");
+        Database database = new Database();
 
-        Guest correctguest = database.getClient(101);
+        Client correctguest = database.getClient(101);
 
 
         assertEquals(101,correctguest.getClientID());
@@ -29,11 +27,13 @@ public class AppTest {
     @Test
     public void clientDoesntExists() {
 
-        Database database = new Database("admin","admin");
-        Guest guest = database.getClient(1);
+        Database database = new Database();
+        Client client = database.getClient(1);
 
 
-        assertEquals(0,guest.getClientID());
+        assertEquals(0, client.getClientID());
 
     }
+
+
 }

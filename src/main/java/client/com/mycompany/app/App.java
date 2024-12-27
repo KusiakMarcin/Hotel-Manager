@@ -2,7 +2,6 @@ package client.com.mycompany.app;
 import client.com.mycompany.app.client.*;
 import org.json.JSONObject;
 
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,7 +10,7 @@ import javafx.stage.Stage;
  */
 public class App extends Application{
 
-    Client client  = new Client();
+    ClientApp client  = new ClientApp();
     JSONObject message = new JSONObject();
     JSONObject response;
     @Override

@@ -2,10 +2,15 @@ package server.com.mycompany.app.server.Database;
 
 import org.json.JSONObject;
 
-import java.sql.Connection;
+import javax.xml.crypto.Data;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.Date;
 
-public class Guest {
+public class Client {
     private int ClientID;
     private String Name;
     private String LastName;
@@ -16,6 +21,9 @@ public class Guest {
     private int CountryCode;
     private String Email;
 
+    public Client(){
+
+    }
 
     public void setClientID(int clientID) {
         this.ClientID = clientID;
@@ -85,11 +93,16 @@ public class Guest {
         tmp.put("CLIENT_ID",ClientID);
         tmp.put("NAME",Name);
         tmp.put("LAST_NAME",LastName);
-        tmp.put("BIRTH_DATE",BirthDate);
+        tmp.put("BIRTH_DATE",BirthDate.toString());
         tmp.put("NATIONALITY",Nationality);
         tmp.put("PHONE_NUMBER",PhoneNumber);
         tmp.put("COUNTRY_CODE", CountryCode);
         tmp.put("EMAIL_ADRESS",Email);
         return tmp;
     }
+
+
 }
+
+
+
