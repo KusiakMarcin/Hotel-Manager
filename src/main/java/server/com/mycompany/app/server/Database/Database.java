@@ -66,7 +66,11 @@ public class Database {
         }
         return dataList;
     }
+    /** retriveClientData
+     *  Metoda umieszcza Dane otrzymane w wyniku wykonania kwerendy w obiekcie klasy Client.
+     */
     public void retriveClientData(Client client, ResultSet data){
+
         try {
             client.setClientID(data.getInt("CLIENT_ID"));
             client.setName(data.getString("NAME"));
@@ -169,6 +173,7 @@ public int updateClient(int primaryKey,String column,Date value){
             e.printStackTrace();
             return -1;
         };
+
         return 0;
     }
     public int InsertHotel(Hotel hotel) {
@@ -185,11 +190,11 @@ public int updateClient(int primaryKey,String column,Date value){
             stmt.setInt(8, hotel.getCountryCode()); // COUNTRY_CODE
             int rowsInserted = stmt.executeUpdate();
             System.out.println(rowsInserted + " rows inserted.");
-            return rowsInserted;
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
         }
+        return 0;
     }
     public int updateHotel(int primaryKey, String column, String value) {
         String sql = querry.Hotels.get(querry.UPDATE);
@@ -240,6 +245,10 @@ public int updateClient(int primaryKey,String column,Date value){
         }
         return dataList;
     }
+
+//    public ArrayList<Room> getRoomTable(){
+//        String sql = querry
+//    }
 }
 
 

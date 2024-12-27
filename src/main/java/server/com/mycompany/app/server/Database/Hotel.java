@@ -5,15 +5,28 @@ import org.json.JSONObject;
 public class Hotel {
     private int hotelId;
     private String hotelName;
-    private String street;
+    private String Street;
     private int buildingNumber;
     private String postCode;
-    private String city;
-    private String country;
+    private String City;
+    private String Country;
     private int phoneNumber;
     private int countryCode;
 
-    public Hotel() {
+    public Hotel(){
+        ;
+    }
+    public Hotel(int hotelid,String hotelname,String street,int buildingnumber,String postcode,String city,String country,int phone,int countrycode) {
+        hotelId = hotelid;
+        hotelName = hotelname;
+        Street = street;
+        buildingNumber = buildingnumber;
+        postCode = postcode;
+        City = city;
+        Country = country;
+        phoneNumber = phone;
+        countryCode = countrycode;
+
     }
 
     public void setHotelId(int hotelId) {
@@ -25,7 +38,7 @@ public class Hotel {
     }
 
     public void setStreet(String street) {
-        this.street = street;
+        this.Street = street;
     }
 
     public void setBuildingNumber(int buildingNumber) {
@@ -37,11 +50,11 @@ public class Hotel {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.City = city;
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.Country = country;
     }
 
     public void setPhoneNumber(int phoneNumber) {
@@ -61,7 +74,7 @@ public class Hotel {
     }
 
     public String getStreet() {
-        return street;
+        return Street;
     }
 
     public int getBuildingNumber() {
@@ -73,11 +86,11 @@ public class Hotel {
     }
 
     public String getCity() {
-        return city;
+        return City;
     }
 
     public String getCountry() {
-        return country;
+        return Country;
     }
 
     public int getPhoneNumber() {
@@ -92,11 +105,11 @@ public class Hotel {
         JSONObject tmp = new JSONObject();
         tmp.put("HOTEL_ID", hotelId);
         tmp.put("HOTEL_NAME", hotelName);
-        tmp.put("STREET", street);
+        tmp.put("STREET", Street);
         tmp.put("BUILDING_NUMBER", buildingNumber);
         tmp.put("POST_CODE", postCode);
-        tmp.put("CITY", city);
-        tmp.put("COUNTRY", country);
+        tmp.put("CITY", City);
+        tmp.put("COUNTRY", Country);
         tmp.put("PHONE_NUMBER", phoneNumber);
         tmp.put("COUNTRY_CODE", countryCode);
         return tmp;

@@ -22,8 +22,20 @@ public class Client {
     private String Email;
 
     public Client(){
-
+        ;
     }
+    public Client(int clientID, String name, String lastName, Date birthDate,
+                  String nationality, int phoneNumber, int countryCode, String email) {
+        this.ClientID = clientID;
+        this.Name = name;
+        this.LastName = lastName;
+        this.BirthDate = birthDate;
+        this.Nationality = nationality;
+        this.PhoneNumber = phoneNumber;
+        this.CountryCode = countryCode;
+        this.Email = email;
+    }
+
 
     public void setClientID(int clientID) {
         this.ClientID = clientID;

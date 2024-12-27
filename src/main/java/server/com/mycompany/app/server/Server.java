@@ -29,31 +29,36 @@ public class Server implements ServerInterface{
 
 
         try {
-
-            Client client;
-
-
             serverSocket = new ServerSocket(port);
             clientSocket = serverSocket.accept();
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String message = in.readLine();
-            messageJSON = new JSONObject(message);
-            while(!messageJSON.getString("Type").equals("CLOSE")){
-                messageHandler(messageJSON);
-                message = in.readLine();
-            }
-
-            stop();
-
-
         }catch (IOException e){
             System.out.println("failed start:");
             System.out.println(e);
         }
     }
 
+    public void Listener(){
+        String message = new String();
+        try{
+            message = in.readLine();
+        }catch (IOException e){
+            e.printStackTrace();
+            e.getMessage();
+        }
 
+        messageJSON = new JSONObject(message);
+        while(!messageJSON.getString("Type").equals("CLOSE")){
+            messageHandler(messageJSON);
+            try{
+                message = in.readLine();
+            }catch (IOException e){
+                e.printStackTrace();
+                e.getMessage();
+            }
+        }
+    }
     void messageHandler(JSONObject msg){
 
         JSONObject response = new JSONObject();
