@@ -10,10 +10,14 @@ public class Client{
     private PrintWriter out;
     private BufferedReader in;
 
-    private JSONObject message= new JSONObject();
+    private String message;
+
+    private String response;
 
 
-
+    public Client(String ip,int port){
+        startConnection(ip,port);
+    }
     public void startConnection(String ip, int port) {
         try {
             clientSocket = new Socket(ip, port);
@@ -26,7 +30,10 @@ public class Client{
             System.out.println(e);
         }
         }
+    public void Listener(){
 
+
+    }
     public JSONObject sendMessage(String msg) {
         out.println(msg);
         JSONObject data;
