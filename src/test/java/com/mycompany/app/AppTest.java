@@ -2,10 +2,13 @@ package com.mycompany.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import oracle.sql.DATE;
 import org.junit.jupiter.api.Test;
 import server.com.mycompany.app.server.Database.*;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * Unit test for simple App.
@@ -69,6 +72,31 @@ public class AppTest {
         Database database = new Database();
         int a = database.InsertHotel(hotel);
         assertEquals(0,a);
+    }
+
+    @Test
+    public void GetRoomTableTest(){
+        Database database = new Database();
+        ArrayList<Room> data = database.getRoomTable();
+        assertTrue(data.isEmpty());
+    }
+
+    @Test
+    public void GetClientTableTest(){
+
+    }
+
+    @Test
+    public void TestUpdateStringClient(){
+        Database database = new Database();
+        assertEquals(0,database.updateClient(7,"NAME","Aeron"));
+    }
+
+    @Test
+    public void TestUpdateDateClient(){
+        Date date = new Date(1999,12,21);
+        Database database = new Database();
+        assertEquals(0,database.updateClient(7,"BIRTH_DATE",date));
     }
 
 }

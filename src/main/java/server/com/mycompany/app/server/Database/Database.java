@@ -25,7 +25,7 @@ public class Database {
     }
     public Client getClient(int primaryKey){
 
-        String a = querry.Clients.get(querry.SELECT);
+        String a = querry.Clients.get("GET_CLIENT");
         var tmp = new Client();
         try {
             PreparedStatement stmt = con.prepareStatement(a, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -46,7 +46,7 @@ public class Database {
 
     }
     public ArrayList<Client> getClientTable(){
-        String Querry = querry.Clients.get(querry.TABLE);
+        String Querry = querry.Clients.get("GET_TABLE");
         var tmp = new Client();
         ArrayList<Client> dataList = new ArrayList<Client>();
         try{
@@ -103,14 +103,25 @@ public class Database {
         }
     }
 
+    public void retrieveRoomData(Room room, ResultSet data) {
+        try {
+            room.setRoomID(data.getInt("ROOM_ID"));
+            room.setRoomNumber(data.getInt("ROOM_NUMBER"));
+            room.setHotelID(data.getInt("HOTEL_HOTEL_ID"));
+            room.setRoomType(data.getInt("ROOM_TYPE_TYPE_ID"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 public int updateClient(int primaryKey,String column,Date value){
-        String Querry = querry.Clients.get(querry.UPDATE);
+        String Querry = querry.Clients.get("UPDATE");
+        Querry = Querry.replaceAll("#",column);
         try {
             PreparedStatement stmt = con.prepareStatement(Querry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.setString(1,column);
-            stmt.setDate(2,value);
-            stmt.setInt(3,primaryKey);
+            stmt.setDate(1,value);
+            stmt.setInt(2,primaryKey);
 
             stmt.executeQuery();
 
@@ -121,12 +132,12 @@ public int updateClient(int primaryKey,String column,Date value){
         return 0;
     }
     public int updateClient(int primaryKey,String column,String value){
-        String Querry = querry.Clients.get(querry.UPDATE);
+        String Querry = querry.Clients.get("UPDATE");
+        Querry = Querry.replaceAll("#",column);
         try {
             PreparedStatement stmt = con.prepareStatement(Querry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.setString(1,column);
-            stmt.setString(2,value);
-            stmt.setInt(3,primaryKey);
+            stmt.setString(1,value);
+            stmt.setInt(2,primaryKey);
 
             stmt.executeQuery();
 
@@ -138,13 +149,13 @@ public int updateClient(int primaryKey,String column,Date value){
         return 0;
 
     }
-    public int updateClient(int primaryKey,String cloumn,int value){
-        String Querry = querry.Clients.get(querry.UPDATE);
+    public int updateClient(int primaryKey,String column,int value){
+        String Querry = querry.Clients.get("UPDATE");
+        Querry = Querry.replaceAll("#",column);
         try {
             PreparedStatement stmt = con.prepareStatement(Querry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.setString(1,cloumn);
-            stmt.setInt(2,value);
-            stmt.setInt(3,primaryKey);
+            stmt.setInt(1,value);
+            stmt.setInt(2,primaryKey);
 
             stmt.executeQuery();
 
@@ -157,7 +168,7 @@ public int updateClient(int primaryKey,String column,Date value){
     }
     public int InsertClient(Client client){
 
-        String a = querry.Clients.get(querry.INSERT);
+        String a = querry.Clients.get("INSERT");
         try {
             PreparedStatement stmt = con.prepareStatement(a);
             stmt.setString(1, client.getName()); // NAME
@@ -177,7 +188,7 @@ public int updateClient(int primaryKey,String column,Date value){
         return 0;
     }
     public int InsertHotel(Hotel hotel) {
-        String sql = querry.Hotels.get(querry.INSERT);
+        String sql = querry.Hotels.get("INSERT");
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, hotel.getHotelName()); // HOTEL_NAME
@@ -197,12 +208,12 @@ public int updateClient(int primaryKey,String column,Date value){
         return 0;
     }
     public int updateHotel(int primaryKey, String column, String value) {
-        String sql = querry.Hotels.get(querry.UPDATE);
+        String sql = querry.Hotels.get("UPDATE");
+        sql = sql.replaceAll("#",column);
         try {
             PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.setString(1, column);
-            stmt.setString(2, value);
-            stmt.setInt(3, primaryKey);
+            stmt.setString(1, value);
+            stmt.setInt(2, primaryKey);
             stmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -212,12 +223,12 @@ public int updateClient(int primaryKey,String column,Date value){
     }
 
     public int updateHotel(int primaryKey, String column, int value) {
-        String sql = querry.Hotels.get(querry.UPDATE);
+        String sql = querry.Hotels.get("UPDATE");
+        sql = sql.replaceAll("#",column);
         try {
             PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.setString(1, column);
-            stmt.setInt(2, value);
-            stmt.setInt(3, primaryKey);
+            stmt.setInt(1, value);
+            stmt.setInt(2, primaryKey);
             stmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -226,7 +237,7 @@ public int updateClient(int primaryKey,String column,Date value){
         return 0;
     }
     public ArrayList<Hotel> getHotelTable() {
-        String sql = querry.Hotels.get(querry.TABLE);
+        String sql = querry.Hotels.get("GET_TABLE");
         ArrayList<Hotel> dataList = new ArrayList<>();
         try {
             PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -246,9 +257,26 @@ public int updateClient(int primaryKey,String column,Date value){
         return dataList;
     }
 
-//    public ArrayList<Room> getRoomTable(){
-//        String sql = querry
-//    }
+   public ArrayList<Room> getRoomTable(){
+        var dataList = new ArrayList<Room>();
+        String sql = querry.Rooms.get("GET_TABLE");
+       try {
+           PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+           ResultSet result = stmt.executeQuery();
+           if (result.first()) {
+               do {
+                   Room tmp = new Room();
+                   retrieveRoomData(tmp, result);
+                   dataList.add(tmp);
+               } while (result.next());
+           } else {
+               System.out.println("No data found in the hotel table.");
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+        return dataList;
+   }
 }
 
 

@@ -60,7 +60,6 @@ public class Server implements ServerInterface{
         }
     }
     void messageHandler(JSONObject msg){
-
         JSONObject response = new JSONObject();
         String Type = msg.getString("Type");
         switch (Type){
