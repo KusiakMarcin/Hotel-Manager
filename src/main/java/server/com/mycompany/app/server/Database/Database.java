@@ -207,6 +207,22 @@ public int updateClient(int primaryKey,String column,Date value){
         }
         return 0;
     }
+    public int insertEmployee(Employee employee){
+        String sql = querry.Personel.get("INSERT");
+        try{
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,employee.getEmployeeName());
+            stmt.setString(2,employee.getEmployeeLastName());
+            stmt.setString(3,employee.getEmployeeNationality());
+            stmt.setDate(4,employee.getEmployeeBirth());
+            int rowsInserted = stmt.executeUpdate();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
+    }
     public int updateHotel(int primaryKey, String column, String value) {
         String sql = querry.Hotels.get("UPDATE");
         sql = sql.replaceAll("#",column);
@@ -277,6 +293,8 @@ public int updateClient(int primaryKey,String column,Date value){
        }
         return dataList;
    }
+
+
 }
 
 

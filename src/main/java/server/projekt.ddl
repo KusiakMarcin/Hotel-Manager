@@ -8,25 +8,6 @@
 -- predefined type, no DDL - MDSYS.SDO_GEOMETRY
 
 -- predefined type, no DDL - XMLTYPE
-CREATE SEQUENCE CLIENT_ID_INCR
-START WITH 1
-INCREMENT BY 1
-MINVALUE 1
-MAXVALUE 99999
-CYCLE ;
-
-CREATE SEQUENCE HOTEL_ID_INCR
-    START WITH 1
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 99999
-    CYCLE ;
-CREATE SEQUENCE ROOM_ID_INCR
-    START WITH 1
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 99999
-    CYCLE ;
 
 CREATE TABLE client (
     client_id    NUMBER(7) NOT NULL,
@@ -89,34 +70,13 @@ LOGGING;
 
 ALTER TABLE personel ADD CONSTRAINT personel_pk PRIMARY KEY ( employee_id );
 
-CREATE TABLE relation_10 (
+CREATE TABLE reservation_payments (
     payments_payment_id        NUMBER(7) NOT NULL,
     reservation_reservation_id NUMBER(7) NOT NULL
 )
 LOGGING;
 
-ALTER TABLE relation_10 ADD CONSTRAINT relation_10_pk PRIMARY KEY ( payments_payment_id,
-                                                                    reservation_reservation_id );
-
-CREATE TABLE relation_8 (
-    reservation_reservation_id                 NUMBER(7) NOT NULL, 
---  ERROR: Column name length exceeds maximum allowed length(30) 
-    reservation_service_reservation_service_id NUMBER(7) NOT NULL
-)
-LOGGING;
-
-ALTER TABLE relation_8 ADD CONSTRAINT relation_8_pk PRIMARY KEY ( reservation_reservation_id,
-                                                                  reservation_service_reservation_service_id );
-
-CREATE TABLE relation_9 (
-    services_service_id                        NUMBER(7) NOT NULL, 
---  ERROR: Column name length exceeds maximum allowed length(30) 
-    reservation_service_reservation_service_id NUMBER(7) NOT NULL
-)
-LOGGING;
-
-ALTER TABLE relation_9 ADD CONSTRAINT relation_9_pk PRIMARY KEY ( services_service_id,
-                                                                  reservation_service_reservation_service_id );
+ALTER TABLE reservation_payments ADD CONSTRAINT reservation_payments_pk PRIMARY KEY ( payments_payment_id,reservation_reservation_id );
 
 CREATE TABLE reservation (
     reservation_id       NUMBER(7) NOT NULL,
@@ -130,15 +90,20 @@ LOGGING;
 ALTER TABLE reservation ADD CONSTRAINT reservation_pk PRIMARY KEY ( reservation_id );
 
 CREATE TABLE reservation_service (
-    reservation_service_id NUMBER(7) NOT NULL
+    service_id NUMBER(7) NOT NULL,
+    reservation_id NUMBER (7) NOT NULL
 )
 LOGGING;
 
-ALTER TABLE reservation_service ADD CONSTRAINT reservation_service_pk PRIMARY KEY ( reservation_service_id );
+ALTER TABLE reservation_service ADD CONSTRAINT reservation_service_pk PRIMARY KEY ( reservation_id, service_id );
+
+
 
 CREATE TABLE room (
     room_id           NUMBER(7) NOT NULL,
-    room_number       NUMBER(3) NOT NULL,
+    room_number       unknown 
+--  ERROR: Datatype UNKNOWN is not allowed 
+    ,
     hotel_hotel_id    NUMBER(7) NOT NULL,
     room_type_type_id NUMBER(7) NOT NULL
 )
@@ -158,6 +123,7 @@ CREATE TABLE room_type (
     cappacity NUMBER(2)
 )
 LOGGING;
+
 
 ALTER TABLE room_type ADD CONSTRAINT room_type_pk PRIMARY KEY ( type_id );
 
@@ -189,37 +155,26 @@ ALTER TABLE payments
         REFERENCES personel ( employee_id )
     NOT DEFERRABLE;
 
-ALTER TABLE relation_10
-    ADD CONSTRAINT relation_10_payments_fk FOREIGN KEY ( payments_payment_id )
+ALTER TABLE reservation_payments
+    ADD CONSTRAINT payments_fk FOREIGN KEY ( payments_payment_id )
         REFERENCES payments ( payment_id )
     NOT DEFERRABLE;
 
-ALTER TABLE relation_10
-    ADD CONSTRAINT relation_10_reservation_fk FOREIGN KEY ( reservation_reservation_id )
+ALTER TABLE reservation_payments
+    ADD CONSTRAINT reservation_fk FOREIGN KEY ( reservation_reservation_id )
         REFERENCES reservation ( reservation_id )
     NOT DEFERRABLE;
-
-ALTER TABLE relation_8
-    ADD CONSTRAINT relation_8_reservation_fk FOREIGN KEY ( reservation_reservation_id )
-        REFERENCES reservation ( reservation_id )
-    NOT DEFERRABLE;
-
---  ERROR: FK name length exceeds maximum allowed length(30) 
-ALTER TABLE relation_8
-    ADD CONSTRAINT relation_8_reservation_service_fk FOREIGN KEY ( reservation_service_reservation_service_id )
-        REFERENCES reservation_service ( reservation_service_id )
-    NOT DEFERRABLE;
-
---  ERROR: FK name length exceeds maximum allowed length(30) 
-ALTER TABLE relation_9
-    ADD CONSTRAINT relation_9_reservation_service_fk FOREIGN KEY ( reservation_service_reservation_service_id )
-        REFERENCES reservation_service ( reservation_service_id )
-    NOT DEFERRABLE;
-
-ALTER TABLE relation_9
-    ADD CONSTRAINT relation_9_services_fk FOREIGN KEY ( services_service_id )
+    
+    ALTER TABLE reservation_service
+    ADD CONSTRAINT service_fk FOREIGN KEY ( service_id )
         REFERENCES services ( service_id )
     NOT DEFERRABLE;
+
+ALTER TABLE reservation_service
+    ADD CONSTRAINT reservation_fk FOREIGN KEY ( reservation_id )
+        REFERENCES reservation ( reservation_id )
+    NOT DEFERRABLE;
+
 
 ALTER TABLE reservation
     ADD CONSTRAINT reservation_personel_fk FOREIGN KEY ( personel_employee_id )
