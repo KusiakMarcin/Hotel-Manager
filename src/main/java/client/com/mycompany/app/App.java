@@ -18,7 +18,7 @@ public class App extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("My First JavaFX App");
-
+        primaryStage.setScene();
         primaryStage.show();
     }
 
