@@ -3,6 +3,8 @@ package com.mycompany.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import client.com.mycompany.app.App;
+import client.com.mycompany.app.client.Client;
 import org.junit.jupiter.api.Test;
 import server.com.mycompany.app.server.Database.*;
 
@@ -34,6 +36,13 @@ public class AppTest {
 
 
         assertEquals(0,guest.getClientID());
+
+    }
+
+    @Test
+    public void TestLoaders(){
+        App app = new App();
+        app.load
 
     }
 }

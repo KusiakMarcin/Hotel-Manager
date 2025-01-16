@@ -1,5 +1,8 @@
 package client.com.mycompany.app.client;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import org.json.JSONObject;
+
 
 import java.net.*;
 import java.io.*;
@@ -9,13 +12,14 @@ public class Client{
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
-
+    private FXMLLoader loader;
     private String message;
 
     private String response;
 
 
     public Client(String ip,int port){
+
         startConnection(ip,port);
     }
     public void startConnection(String ip, int port) {
@@ -60,4 +64,7 @@ public class Client{
             System.out.println(e);
         }
     }
+
+
+
 }

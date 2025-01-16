@@ -1,18 +1,15 @@
-ls
-        <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="861.0" prefWidth="1317.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.com.mycompany.app.client.HotelsView">
+<AnchorPane prefHeight="861.0" prefWidth="1317.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.com.mycompany.app.App">
     <children>
         <ToolBar layoutX="-1.0" layoutY="1.0" prefHeight="46.0" prefWidth="1323.0">
             <items>
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100" text="Hotele" />
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Klienci" />
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pracownicy" />
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Rezerwacje" />
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Płatności" />
+                <Button fx:id="showHotels" mnemonicParsing="false" prefHeight="25.0" prefWidth="100" text="Hotele" onAction="#showHotelsView" />
+                <Button fx:id="showClients" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Klienci" onAction="#showClientsView" />
+                <Button fx:id="showBookings" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Rezerwacje" onAction="#showBookingView" />
             </items>
         </ToolBar>
         <VBox layoutX="29.0" layoutY="409.0" prefHeight="376.0" prefWidth="441.0">
@@ -89,5 +86,16 @@ ls
         <Button layoutX="30.0" layoutY="811.0" mnemonicParsing="false" text="Dodaj" />
         <Button layoutX="32.0" layoutY="360.0" mnemonicParsing="false" text="Usuń" />
         <Button layoutX="120.0" layoutY="360.0" mnemonicParsing="false" text="Edytuj" />
+      <GridPane layoutX="29.0" layoutY="55.0" prefHeight="299.0" prefWidth="441.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
     </children>
 </AnchorPane>
