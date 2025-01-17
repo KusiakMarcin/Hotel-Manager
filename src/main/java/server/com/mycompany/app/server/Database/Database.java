@@ -53,7 +53,7 @@ public class Database {
             PreparedStatement stmt = con.prepareStatement(Querry,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             ResultSet result =stmt.executeQuery();
             if(result.first()) {
-                while (result.isAfterLast()){
+                while (!result.isAfterLast()){
                     retriveClientData(tmp,result);
                     dataList.add(tmp);
                     result.next();
@@ -255,15 +255,17 @@ public int updateClient(int primaryKey,String column,Date value){
     public ArrayList<Hotel> getHotelTable() {
         String sql = querry.Hotels.get("GET_TABLE");
         ArrayList<Hotel> dataList = new ArrayList<>();
+        Hotel tmp = new Hotel();
         try {
             PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet result = stmt.executeQuery();
-            if (result.first()) {
-                do {
-                    Hotel tmp = new Hotel();
-                    retrieveHotelData(tmp, result);
-                    dataList.add(tmp);
-                } while (result.next());
+                if(result.first()) {
+                    while (!result.isAfterLast()){
+                        System.out.println(result.isAfterLast());
+                        retrieveHotelData(tmp,result);
+                        dataList.add(tmp);
+                        result.next();
+                    }
             } else {
                 System.out.println("No data found in the hotel table.");
             }
@@ -276,15 +278,17 @@ public int updateClient(int primaryKey,String column,Date value){
    public ArrayList<Room> getRoomTable(){
         var dataList = new ArrayList<Room>();
         String sql = querry.Rooms.get("GET_TABLE");
+        Room tmp = new Room();
        try {
            PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
            ResultSet result = stmt.executeQuery();
            if (result.first()) {
-               do {
-                   Room tmp = new Room();
-                   retrieveRoomData(tmp, result);
+               while (!result.isAfterLast()){
+                   System.out.println(result.isAfterLast());
+                   retrieveRoomData(tmp,result);
                    dataList.add(tmp);
-               } while (result.next());
+                   result.next();
+               }
            } else {
                System.out.println("No data found in the hotel table.");
            }
@@ -293,8 +297,61 @@ public int updateClient(int primaryKey,String column,Date value){
        }
         return dataList;
    }
+   public int insertBooking(){
 
+   }
 
+    public int deleteClient(int ID){
+        String sql = querry.Clients.get("DELETE");
+        try {
+                PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                stmt.setInt(1,ID);
+                ResultSet result = stmt.executeQuery();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return 1;
+        }
+        return 0;
+    }
+    public int deleteHotel(int hotelID) {
+        String sql = querry.Hotels.get("DELETE");
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setInt(1, hotelID);
+            ResultSet result = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 1;
+        }
+        return 0;
+    }
+
+    public int deleteRoom(int roomID) {
+        String sql = querry.Rooms.get("DELETE");
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setInt(1, roomID);
+            ResultSet result = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 1;
+        }
+        return 0;
+    }
+
+    public int deleteBooking(int bookingID) {
+        String sql = querry.Booking.get("DELETE");
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setInt(1, bookingID);
+            ResultSet result = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 1;
+        }
+        return 0;
+    }
 }
 
 

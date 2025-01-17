@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import oracle.sql.DATE;
 import org.junit.jupiter.api.Test;
 import server.com.mycompany.app.server.Database.*;
+
+import javax.xml.crypto.Data;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -78,12 +80,14 @@ public class AppTest {
     public void GetRoomTableTest(){
         Database database = new Database();
         ArrayList<Room> data = database.getRoomTable();
-        assertTrue(data.isEmpty());
+        assertTrue(!data.isEmpty());
     }
 
     @Test
     public void GetClientTableTest(){
-
+        Database database = new Database();
+        ArrayList<Client> data = database.getClientTable();
+        assertTrue(!data.isEmpty());
     }
 
     @Test
@@ -98,5 +102,9 @@ public class AppTest {
         Database database = new Database();
         assertEquals(0,database.updateClient(7,"BIRTH_DATE",date));
     }
-
+    @Test
+    public void TestDelete(){
+        Database database = new Database();
+        assertEquals(0,database.deleteClient(4));
+    }
 }
